@@ -12,7 +12,7 @@ def give_statistic_hh(languages):
         page = 0
         pages_number = 100
         city = 1
-        items_page = []
+        page_subject = []
         while page < pages_number:
             url = 'https://api.hh.ru/vacancies'
             headers = {
@@ -26,12 +26,12 @@ def give_statistic_hh(languages):
             response = requests.get(url, headers=headers, params=params)
             response.raise_for_status()
             page_request = response.json()
-            items_page.append(page_request['items'])
+            page_subject.append(page_request['items'])
             page += 1
             if page > page_request['pages']:
                 break
         vacancy_amount = page_request['found']
-        salary_count = sum_salary(items_page)
+        salary_count = sum_salary(page_subject)
         salary_average = int(sum(salary_count) / len(salary_count))
         language_info = {
             "vacancies_found": vacancy_amount,
