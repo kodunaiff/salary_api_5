@@ -11,6 +11,7 @@ def give_statistic_hh(languages):
     for language in languages:
         page = 0
         pages_number = 100
+        city = 1
         vacancies = []
         while page < pages_number:
             url = 'https://api.hh.ru/vacancies'
@@ -19,7 +20,7 @@ def give_statistic_hh(languages):
             }
             params = {
                 'text': f'Программист {language}',
-                'area': '1',
+                'area': city,
                 'page': page
             }
             response = requests.get(url, headers=headers, params=params)
@@ -47,6 +48,8 @@ def give_statistic_sj(languages, token_sj):
     for language in languages:
         page = 0
         pages_number = 25
+        city = 4
+        profession_catalog = 33
         vacancies = []
         vacancies_all = []
 
@@ -56,8 +59,8 @@ def give_statistic_sj(languages, token_sj):
                 'X-Api-App-Id': token_sj,
             }
             payload = {
-                'town': 4,
-                'catalogues': 33,
+                'town': city,
+                'catalogues': profession_catalog,
                 'keyword': language,
                 'page': page,
             }
