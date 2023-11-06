@@ -3,7 +3,7 @@ import os
 import requests
 from dotenv import load_dotenv
 
-from func_main import sum_salary, predict_rub_salary_sj, vacansy_table
+from calculat_salary import sum_salary, predict_rub_salary_sj, vacansy_table
 
 
 def headhunter_vacansy(languages):
