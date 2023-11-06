@@ -32,10 +32,12 @@ def give_statistic_hh(languages):
                 break
         vacancy_amount = page_request['found']
         salaries = give_salaries(page_vacancies)
-        salary_average = int(sum(salaries) / len(salaries))
+        salaries_amount = sum(salaries)
+        salaries_count = len(salaries)
+        salary_average = int(salaries_amount / salaries_count) if salaries_count else 0
         language_statistic = {
             "vacancies_found": vacancy_amount,
-            "vacancies_processed": len(salaries),
+            "vacancies_processed": salaries_count,
             "average_salary": salary_average
         }
         vacansy_language[language] = language_statistic
@@ -72,14 +74,15 @@ def give_statistic_sj(languages, token_sj):
                     vacancies.append(salary)
                 vacancies_all.append((vacancy['profession']))
             page += 1
-        salary_average = sum(vacancies)
-        if len(vacancies) > 0:
-            language_statistic = {
-                "vacancies_found": len(vacancies_all),
-                "vacancies_processed": len(vacancies),
-                "average_salary": int(salary_average / len(vacancies))
-            }
-            vacansy_language[language] = language_statistic
+        salaries_amount = sum(vacancies)
+        salaries_count = len(vacancies)
+        salary_average = int(salaries_amount / salaries_count) if salaries_count else 0
+        language_statistic = {
+            "vacancies_found": len(vacancies_all),
+            "vacancies_processed": salaries_count,
+            "average_salary": salary_average
+        }
+        vacansy_language[language] = language_statistic
     return vacansy_language
 
 
