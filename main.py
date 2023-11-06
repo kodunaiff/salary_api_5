@@ -52,7 +52,6 @@ def give_statistic_sj(languages, token_sj):
         city = 4
         profession_catalog = 33
         vacancies = []
-        vacancies_all = []
 
         while page < pages_number:
             url = 'https://api.superjob.ru/2.0/vacancies/'
@@ -72,13 +71,13 @@ def give_statistic_sj(languages, token_sj):
                 salary = predict_rub_salary_sj(vacancy)
                 if salary:
                     vacancies.append(salary)
-                vacancies_all.append((vacancy['profession']))
             page += 1
+        vacancy_amount = page_request['total']
         salaries_amount = sum(vacancies)
         salaries_count = len(vacancies)
         salary_average = int(salaries_amount / salaries_count) if salaries_count else 0
         language_statistic = {
-            "vacancies_found": len(vacancies_all),
+            "vacancies_found": vacancy_amount,
             "vacancies_processed": salaries_count,
             "average_salary": salary_average
         }
