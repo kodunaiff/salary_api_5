@@ -3,7 +3,7 @@ import os
 import requests
 from dotenv import load_dotenv
 
-from calculat_salary import sum_salary, predict_rub_salary_sj, create_table
+from calculat_salary import give_salaries, predict_rub_salary_sj, create_table
 
 
 def give_statistic_hh(languages):
@@ -31,7 +31,7 @@ def give_statistic_hh(languages):
             if page > page_request['pages']:
                 break
         vacancy_amount = page_request['found']
-        salaries = sum_salary(page_vacancies)
+        salaries = give_salaries(page_vacancies)
         salary_average = int(sum(salaries) / len(salaries))
         language_statistic = {
             "vacancies_found": vacancy_amount,
