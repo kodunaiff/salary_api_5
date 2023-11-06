@@ -24,13 +24,13 @@ def predict_rub_salary_sj(vacancy):
         return predict_salary(salary_from, salary_to)
 
 
-def sum_salary(vacancies):
+def sum_salary(items_page):
     salaries = []
-    for vacancy in vacancies:
-        for items in vacancy:
-            salary_zp = predict_rub_salary(items['salary'])
-            if salary_zp:
-                salaries.append(salary_zp)
+    for vacancies in items_page:
+        for vacancy in vacancies:
+            salary = predict_rub_salary(vacancy['salary'])
+            if salary:
+                salaries.append(salary)
     return salaries
 
 
