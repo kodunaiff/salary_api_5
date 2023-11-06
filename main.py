@@ -12,7 +12,7 @@ def give_statistic_hh(languages):
         page = 0
         pages_number = 100
         city = 1
-        page_subject = []
+        page_vacancies = []
         while page < pages_number:
             url = 'https://api.hh.ru/vacancies'
             headers = {
@@ -26,19 +26,19 @@ def give_statistic_hh(languages):
             response = requests.get(url, headers=headers, params=params)
             response.raise_for_status()
             page_request = response.json()
-            page_subject.append(page_request['items'])
+            page_vacancies.append(page_request['items'])
             page += 1
             if page > page_request['pages']:
                 break
         vacancy_amount = page_request['found']
-        salary_count = sum_salary(page_subject)
-        salary_average = int(sum(salary_count) / len(salary_count))
-        language_info = {
+        salaries = sum_salary(page_vacancies)
+        salary_average = int(sum(salaries) / len(salaries))
+        language_statistic = {
             "vacancies_found": vacancy_amount,
-            "vacancies_processed": len(salary_count),
+            "vacancies_processed": len(salaries),
             "average_salary": salary_average
         }
-        vacansy_language[language] = language_info
+        vacansy_language[language] = language_statistic
     return vacansy_language
 
 
@@ -74,12 +74,12 @@ def give_statistic_sj(languages, token_sj):
             page += 1
         salary_average = sum(vacancies)
         if len(vacancies) > 0:
-            language_info = {
+            language_statistic = {
                 "vacancies_found": len(vacancies_all),
                 "vacancies_processed": len(vacancies),
                 "average_salary": int(salary_average / len(vacancies))
             }
-            vacansy_language[language] = language_info
+            vacansy_language[language] = language_statistic
     return vacansy_language
 
 

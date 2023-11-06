@@ -24,9 +24,9 @@ def predict_rub_salary_sj(vacancy):
         return predict_salary(salary_from, salary_to)
 
 
-def sum_salary(page_subject):
+def sum_salary(page_vacancies):
     salaries = []
-    for vacancies in page_subject:
+    for vacancies in page_vacancies:
         for vacancy in vacancies:
             salary = predict_rub_salary(vacancy['salary'])
             if salary:
