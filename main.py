@@ -3,10 +3,10 @@ import os
 import requests
 from dotenv import load_dotenv
 
-from calculat_salary import sum_salary, predict_rub_salary_sj, vacansy_table
+from calculat_salary import sum_salary, predict_rub_salary_sj, create_table
 
 
-def headhunter_vacansy(languages):
+def give_statistic_hh(languages):
     vacansy_language = {}
     for language in languages:
         page = 0
@@ -42,7 +42,7 @@ def headhunter_vacansy(languages):
     return vacansy_language
 
 
-def superjob_vacansy(languages, token_sj):
+def give_statistic_sj(languages, token_sj):
     vacansy_language = {}
     for language in languages:
         page = 0
@@ -89,8 +89,8 @@ def main():
     ]
     load_dotenv()
     token_sj = os.environ['TOKEN_SJ']
-    print(vacansy_table('hh', headhunter_vacansy(languages)))
-    print(vacansy_table('sj', superjob_vacansy(languages, token_sj)))
+    print(create_table('hh', give_statistic_hh(languages)))
+    print(create_table('sj', give_statistic_sj(languages, token_sj)))
 
 
 if __name__ == "__main__":

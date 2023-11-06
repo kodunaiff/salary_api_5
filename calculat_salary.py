@@ -34,7 +34,7 @@ def sum_salary(vacancies):
     return salaries
 
 
-def vacansy_table(title, statistic_vacansy):
+def create_table(title, statistic_vacansy):
     table_headers = [
         'Язык программирования',
         'Вакансий найдено',
