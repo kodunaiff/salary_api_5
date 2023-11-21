@@ -3,10 +3,10 @@ import os
 import requests
 from dotenv import load_dotenv
 
-from calculat_salary import give_salaries, predict_rub_salary_sj, create_table
+from calculat_salary import count_salaries, predict_rub_salary_sj, create_table
 
 
-def give_statistic_hh(languages):
+def predict_statistic_salary_hh(languages):
     vacansy_language = {}
     for language in languages:
         page = 0
@@ -31,7 +31,7 @@ def give_statistic_hh(languages):
             if page > page_request['pages']:
                 break
         vacancy_amount = page_request['found']
-        salaries = give_salaries(page_vacancies)
+        salaries = count_salaries(page_vacancies)
         salaries_amount = sum(salaries)
         salaries_count = len(salaries)
         salary_average = int(salaries_amount / salaries_count) if salaries_count else 0
@@ -44,7 +44,7 @@ def give_statistic_hh(languages):
     return vacansy_language
 
 
-def give_statistic_sj(languages, token_sj):
+def predict_statistic_salary_sj(languages, token_sj):
     vacansy_language = {}
     for language in languages:
         page = 0
@@ -93,8 +93,8 @@ def main():
     ]
     load_dotenv()
     token_sj = os.environ['TOKEN_SJ']
-    print(create_table('hh', give_statistic_hh(languages)))
-    print(create_table('sj', give_statistic_sj(languages, token_sj)))
+    print(create_table('hh', predict_statistic_salary_hh(languages)))
+    print(create_table('sj', predict_statistic_salary_sj(languages, token_sj)))
 
 
 if __name__ == "__main__":
