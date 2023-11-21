@@ -26,7 +26,7 @@ def predict_statistic_salary_hh(languages):
             response = requests.get(url, headers=headers, params=params)
             response.raise_for_status()
             sheet = response.json()
-            page_vacancies.append(sheet['items'])
+            page_vacancies.extend(sheet['items'])
             page += 1
             if page > sheet['pages']:
                 break

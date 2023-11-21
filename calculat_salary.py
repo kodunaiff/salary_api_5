@@ -26,11 +26,10 @@ def predict_rub_salary_sj(vacancy):
 
 def count_salaries(page_vacancies):
     salaries = []
-    for vacancies in page_vacancies:
-        for vacancy in vacancies:
-            salary = predict_rub_salary(vacancy['salary'])
-            if salary:
-                salaries.append(salary)
+    for vacancy in page_vacancies:
+        salary = predict_rub_salary(vacancy['salary'])
+        if salary:
+            salaries.append(salary)
     return salaries
 
 
