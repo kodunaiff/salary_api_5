@@ -3,7 +3,8 @@ import os
 import requests
 from dotenv import load_dotenv
 
-from calculat_salary import count_salaries, predict_rub_salary_sj, create_table
+from calculate_salary import count_salaries, predict_rub_salary_sj
+from create_table import create_table
 
 
 def predict_statistic_salary_hh(languages):
