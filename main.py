@@ -25,12 +25,12 @@ def predict_statistic_salary_hh(languages):
             }
             response = requests.get(url, headers=headers, params=params)
             response.raise_for_status()
-            page_request = response.json()
-            page_vacancies.append(page_request['items'])
+            sheet = response.json()
+            page_vacancies.append(sheet['items'])
             page += 1
-            if page > page_request['pages']:
+            if page > sheet['pages']:
                 break
-        vacancy_amount = page_request['found']
+        vacancy_amount = sheet['found']
         salaries = count_salaries(page_vacancies)
         salaries_amount = sum(salaries)
         salaries_count = len(salaries)
@@ -66,13 +66,13 @@ def predict_statistic_salary_sj(languages, token_sj):
             }
             response = requests.get(url, headers=headers, params=payload)
             response.raise_for_status()
-            page_request = response.json()
-            for vacancy in page_request['objects']:
+            sheet = response.json()
+            for vacancy in sheet['objects']:
                 salary = predict_rub_salary_sj(vacancy)
                 if salary:
                     vacancies.append(salary)
             page += 1
-        vacancy_amount = page_request['total']
+        vacancy_amount = sheet['total']
         salaries_amount = sum(vacancies)
         salaries_count = len(vacancies)
         salary_average = int(salaries_amount / salaries_count) if salaries_count else 0
