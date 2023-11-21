@@ -7,7 +7,7 @@ from calculat_salary import count_salaries, predict_rub_salary_sj, create_table
 
 
 def predict_statistic_salary_hh(languages):
-    vacansy_language = {}
+    language_vacansy = {}
     for language in languages:
         page = 0
         pages_number = 100
@@ -34,18 +34,18 @@ def predict_statistic_salary_hh(languages):
         salaries = count_salaries(page_vacancies)
         salaries_amount = sum(salaries)
         salaries_count = len(salaries)
-        salary_average = int(salaries_amount / salaries_count) if salaries_count else 0
+        average_salary = int(salaries_amount / salaries_count) if salaries_count else 0
         language_statistic = {
             "vacancies_found": vacancy_amount,
             "vacancies_processed": salaries_count,
-            "average_salary": salary_average
+            "average_salary": average_salary
         }
-        vacansy_language[language] = language_statistic
-    return vacansy_language
+        language_vacansy[language] = language_statistic
+    return language_vacansy
 
 
 def predict_statistic_salary_sj(languages, token_sj):
-    vacansy_language = {}
+    language_vacansy = {}
     for language in languages:
         page = 0
         pages_number = 25
@@ -75,14 +75,14 @@ def predict_statistic_salary_sj(languages, token_sj):
         vacancy_amount = sheet['total']
         salaries_amount = sum(vacancies)
         salaries_count = len(vacancies)
-        salary_average = int(salaries_amount / salaries_count) if salaries_count else 0
+        average_salary = int(salaries_amount / salaries_count) if salaries_count else 0
         language_statistic = {
             "vacancies_found": vacancy_amount,
             "vacancies_processed": salaries_count,
-            "average_salary": salary_average
+            "average_salary": average_salary
         }
-        vacansy_language[language] = language_statistic
-    return vacansy_language
+        language_vacansy[language] = language_statistic
+    return language_vacansy
 
 
 def main():
