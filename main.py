@@ -49,12 +49,12 @@ def predict_statistic_salary_sj(languages, token_sj):
     language_statistic = {}
     for language in languages:
         page = 0
-        pages_number = 25
+        more_pages = True
         city = 4
         profession_catalog = 33
         salaries = []
 
-        while page < pages_number:
+        while more_pages:
             url = 'https://api.superjob.ru/2.0/vacancies/'
             headers = {
                 'X-Api-App-Id': token_sj,
@@ -73,6 +73,7 @@ def predict_statistic_salary_sj(languages, token_sj):
                 if salary:
                     salaries.append(salary)
             page += 1
+            more_pages = sheet['more']
         vacancy_amount = sheet['total']
         salaries_amount = sum(salaries)
         salaries_count = len(salaries)
