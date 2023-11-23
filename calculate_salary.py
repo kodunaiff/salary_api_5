@@ -8,17 +8,15 @@ def predict_salary(salary_from, salary_to):
 
 
 def predict_rub_salary(vacancy):
-    if vacancy and vacancy['currency'] == 'RUR':
-        salary_from = vacancy['from']
-        salary_to = vacancy['to']
-        return predict_salary(salary_from, salary_to)
+    if not vacancy or vacancy['currency'] != 'RUR':
+        return None
+    return predict_salary(vacancy['from'], vacancy['to'])
 
 
 def predict_rub_salary_sj(vacancy):
-    if vacancy['currency'] == 'rub':
-        salary_from = vacancy['payment_from']
-        salary_to = vacancy['payment_to']
-        return predict_salary(salary_from, salary_to)
+    if vacancy['currency'] != 'rub':
+        return None
+    return predict_salary(vacancy['payment_from'], vacancy['payment_to'])
 
 
 def count_salaries(page_vacancies):
