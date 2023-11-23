@@ -8,7 +8,7 @@ from create_table import create_table
 
 
 def predict_statistic_salary_hh(languages):
-    language_vacansy = {}
+    language_statistic = {}
     for language in languages:
         page = 0
         pages_number = 100
@@ -36,17 +36,17 @@ def predict_statistic_salary_hh(languages):
         salaries_amount = sum(salaries)
         salaries_count = len(salaries)
         average_salary = int(salaries_amount / salaries_count) if salaries_count else 0
-        language_statistic = {
+        statistic = {
             "vacancies_found": vacancy_amount,
             "vacancies_processed": salaries_count,
             "average_salary": average_salary
         }
-        language_vacansy[language] = language_statistic
-    return language_vacansy
+        language_statistic[language] = statistic
+    return language_statistic
 
 
 def predict_statistic_salary_sj(languages, token_sj):
-    language_vacansy = {}
+    language_statistic = {}
     for language in languages:
         page = 0
         pages_number = 25
@@ -77,13 +77,13 @@ def predict_statistic_salary_sj(languages, token_sj):
         salaries_amount = sum(salaries)
         salaries_count = len(salaries)
         average_salary = int(salaries_amount / salaries_count) if salaries_count else 0
-        language_statistic = {
+        statistic = {
             "vacancies_found": vacancy_amount,
             "vacancies_processed": salaries_count,
             "average_salary": average_salary
         }
-        language_vacansy[language] = language_statistic
-    return language_vacansy
+        language_statistic[language] = statistic
+    return language_statistic
 
 
 def main():
